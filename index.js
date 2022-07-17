@@ -1,104 +1,27 @@
-const inquirer = require("inquirer");
-const Engineer = require("./lib/Engineer");
+const inquirer = require('inquirer');
+const questions = require('./src/questions')
+const Engineer = require('./lib/Engineer');
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const Employee = require("./lib/Employee");
 
 var team = []; // employee objects
 
-let teamBuild = false;
 let employeeType = 'manager';
 
-while (teamBuild === false) {
-
-  // Get Manager Info
-  if (employeeType === "manager"){
-      inquirer.prompt([
-    // prompted to enter the team manager’s name
-    {
-      type:'input',
-      message: "Enter the manager's name",
-      name: managerName
-    },
-    // prompted to enter the team employee ID
-    {
-      type:'input',
-      message: "Enter the manager's employee ID",
-      name: managerID
-    },
-    // prompted to enter the team manager’s email address
-    {
-      type:'input',
-      message: 'Enter the Manager name',
-      name: managerEmail
-    },
-    // prompted to enter the team manager’s office number
-    {
-      type:'input',
-      message: 'Manager name',
-      name: managerName
+function buildManager() {
+    inquirer
+      .prompt(questions.managerQuestions)
+      .then((answers) => {
+          const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+          team.push(manager);
+          employeeType = answers.newMember;
+      })
+      .catch((error) => {
+        if (error.isTtyError) {
+          console.log(error)
+        }
+      });
     }
-    // presented with a menu with the option to add an engineer or an intern or to finish building my team
-  ]);
-  }
-  else if (employeeType === "engineer") {
-    inquirer.prompt([
-      // prompted to enter the team manager’s name
-      {
-        type:'input',
-        message: "Enter the engineer's name",
-        name: managerName
-      },
-      // prompted to enter the team employee ID
-      {
-        type:'input',
-        message: "Enter the engineer's employee ID",
-        name: managerID
-      },
-      // prompted to enter the team manager’s email address
-      {
-        type:'input',
-        message: "Enter the engineer's email address",
-        name: managerEmail
-      },
-      // prompted to enter the team manager’s office number
-      {
-        type:'input',
-        message: "Enter the engineer's github's username",
-        name: engineerUsername
-      }
-      // presented with a menu with the option to add an engineer or an intern or to finish building my team
-    ]);
-  }
-  else if (employeeType === "intern"){
-    inquirer.prompt([
-      // prompted to enter the team manager’s name
-      {
-        type:'input',
-        message: "Enter the engineer's name",
-        name: managerName
-      },
-      // prompted to enter the team employee ID
-      {
-        type:'input',
-        message: "Enter the engineer's employee ID",
-        name: managerID
-      },
-      // prompted to enter the team manager’s email address
-      {
-        type:'input',
-        message: "Enter the engineer's email address",
-        name: managerEmail
-      },
-      // prompted to enter the team manager’s office number
-      {
-        type:'input',
-        message: "Enter the engineer's github's username",
-        name: engineerUsername
-      }
-      // presented with a menu with the option to add an engineer or an intern or to finish building my team
-    ]);
-  }
-}
+  
 
-// Build team

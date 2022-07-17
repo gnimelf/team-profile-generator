@@ -9,7 +9,6 @@
   "scripts": {
     "test": "jest --verbose"
   },
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gnimelf/team-profile-generator.git"
