@@ -18,7 +18,7 @@ generatedHTML=`
     <h1>My Team</h1>
   </header>
   <main class="container">
-    ${card}
+    ${cards}
   </main>
 </body>
 
