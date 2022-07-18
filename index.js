@@ -5,27 +5,11 @@ const Engineer = require("./lib/Engineer");
 const Manager = require("./lib/Manager");
 const Intern = require("./lib/Intern");
 const helper = require("./src/helper");
-const card = require("./card");
+const card = require("./src/card");
 
 var team = []; // employee objects
 var cards = []; // employee cards
  
-var testTeam = [
-  {
-    name: 'bob1',
-    id: '1',
-    email: 'bob1@no.com',
-    officeNumber: '1001'
-  },
-  {
-    name: 'bob2',
-    id: '2',
-    email: 'bob2@no.com',
-    github: bob2git
-  }
-]
-
-let employeeType = "manager";
 
 function buildManager() {
   inquirer
@@ -41,7 +25,6 @@ function buildManager() {
       team.push(manager);
       // Check if a new member is needed
       if (answers.newMember === "Engineer") {
-        // console.log('engineer')
         buildEngineer();
       } else if (answers.newMember === "Intern") {
         buildIntern();
@@ -85,7 +68,7 @@ function buildEngineer() {
 
 function buildIntern() {
   inquirer
-    .prompt(questions.InternQuestions)
+    .prompt(questions.internQuestions)
     .then((answers) => {
       const Inter = new Intern(
         answers.name,
@@ -111,10 +94,41 @@ function buildIntern() {
 }
 
 function buildTeam() {
+  console.log(`There are ${team.length} objects in teams`)
   team.forEach(object => {
-    console.log(object);
+    var newCard = '';
+    var officeNum = '';
+    var github = '';
+    var school = '';
+    var role = object.getRole();
+    var id = object.getId();
+    var name = object.getName();
+    var email = object.getEmail();
+
+
+    if (role == "Manager"){
+      officeNum = object.getOfficeNumber();
+      newCard = card.generateManagerCard(name, id, email, officeNum);
+      cards.push(newCard);
+    } else if(role == "Engineer") {
+      github = object.getGithub();
+      newCard = card.generateEngineerCard(name, id, email, github);
+      cards.push(newCard);
+    } else if(role == "Intern"){
+      school = object.getSchool();
+      newCard = card.generateInternCard(name, id, email, school);
+      cards.push(newCard);
+    }
   });
+  
+  cards = cards.toString().replace(/,/g, '');
+  var htmlCode = helper.generatedHTML(cards);
+  writeToFile("team.html", htmlCode)
 }
 
-// buildManager();
-buildTeam(); 
+function writeToFile(fileName, data) {
+  fs.writeFileSync(fileName, data);
+}
+
+buildManager();
+// buildTeam(); 
