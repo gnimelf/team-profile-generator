@@ -1,5 +1,7 @@
-generatedHTML=`
-<!DOCTYPE html>
+
+
+function generatedHTML(cards){
+return  `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,4 +25,7 @@ generatedHTML=`
 </body>
 
 </html>
-`
+` 
+}
+
+module.exports = {generatedHTML}

@@ -52,7 +52,7 @@ const managerQuestions = [
     {
       type: 'input',
       message: "Enter the engineer's github's username",
-      name: "username"
+      name: "github"
     },
     {
       type: 'list',
