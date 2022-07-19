@@ -123,7 +123,7 @@ function buildTeam() {
   
   cards = cards.toString().replace(/,/g, '');
   var htmlCode = helper.generatedHTML(cards);
-  writeToFile("team.html", htmlCode)
+  writeToFile("./dist/team.html", htmlCode)
 }
 
 function writeToFile(fileName, data) {
@@ -131,4 +131,3 @@ function writeToFile(fileName, data) {
 }
 
 buildManager();
-// buildTeam(); 
