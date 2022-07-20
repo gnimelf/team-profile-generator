@@ -70,17 +70,17 @@ const managerQuestions = [
   const internQuestions = [
     {
       type: 'input',
-      message: "Enter the Inters's name",
+      message: "Enter the intern's name",
       name: "name"
     },
     {
       type: 'input',
-      message: "Enter the manager's ID",
+      message: "Enter the intern's ID",
       name: "id"
     },
     {
       type: 'input',
-      message: 'Enter the Manager email',
+      message: "Enter the intern's email",
       name: "email"
     },
     {
