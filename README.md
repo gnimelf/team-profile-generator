@@ -52,5 +52,5 @@ This is a Node.js command-line application that takes in information about emplo
 
 ## Tests
 
-Test have writen and are under the __tests__ directory
+Tests have been written and are under the __tests__ directory
 To execute, install packages (npm i) and then run: npm test  
